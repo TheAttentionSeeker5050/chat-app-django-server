@@ -12,10 +12,11 @@ class AppUser(AbstractUser):
     """
     
     # these are the only modified fields so i just add these
+    
     bio = models.TextField()
     email = models.EmailField(max_length=35, blank=False, unique=True)
-    phone_number = models.CharField(max_length=12)
-    
-    REQUIRED_FIELDS = ['first_name','password', 'phone_number']
+    phone_number = models.CharField(max_length=12, null=True)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
     
 
