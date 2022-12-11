@@ -50,13 +50,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # third party libraries
+    "corsheaders",
     
     # my apps
     
     "user",
     "appSettings",
     "conversation",
-    "common"
+    "common", 
 ]
 
 MIDDLEWARE = [
@@ -67,6 +69,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # cors headers middleware
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    # rest api middleware
+    
+    # json web token middleware
+    
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -94,9 +103,17 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'chat_app_db',
+        'USER': str(os.getenv("MYSQL_USER")),
+        'PASSWORD': str(os.getenv("MYSQL_PASSWORD")),
+        "HOST":"127.0.0.1",
+        "PORT":"3306",
     }
 }
 
