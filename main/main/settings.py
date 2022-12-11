@@ -52,13 +52,14 @@ INSTALLED_APPS = [
     
     # third party libraries
     "corsheaders",
+    "rest_framework",
+    'rest_framework.authtoken',
     
     # my apps
-    
     "user",
     "appSettings",
     "conversation",
-    "common", 
+    "common",
 ]
 
 MIDDLEWARE = [
@@ -160,3 +161,33 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# cors
+CORS_ALLOWED_ORIGINS = [
+    # for testing purposes, i will accept all origins
+    # however, i will need to change this later
+    "http://localhost:*",
+    "http://127.0.0.1:*"
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
+
+# modifying the user model
+AUTH_USER_MODEL = 'user.AppUser'
+
+# django rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
