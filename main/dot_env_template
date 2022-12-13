@@ -1,0 +1,5 @@
+# please use this template for adding the environment variables
+
+SECRET_KEY=
+MYSQL_PASSWORD=
+MYSQL_USER=
