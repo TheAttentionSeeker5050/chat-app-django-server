@@ -14,6 +14,12 @@ class ChatConversation(models.Model):
     conversation_name = models.CharField(max_length=120, null=True, blank=True)
     creation_date = models.DateField()
     
+class PrivateConversation(models.Model):
+    """This model creates a private conversation between only 2 USERS ONLY"""
+    user_1_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    user_2_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    creation_date = models.DateField()
+    
     
     
 class ChatMessage(models.Model):
@@ -43,11 +49,12 @@ class ChatMessage(models.Model):
     message_media_address = models.TextField(max_length=500)
     creation_date = models.DateField()
     edition_date = models.DateField()
+    direct_message_id = models.ForeignKey(PrivateConversation, on_delete=models.CASCADE)
     
     
 class ChatUserAssociation(models.Model):
     """
-    This contains each user associated with conversation
+    This contains each user associated with conversation group between any number of users
     """
     
     conversation_id = models.ForeignKey(ChatConversation, on_delete=models.CASCADE)
