@@ -162,12 +162,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # cors
-CORS_ALLOWED_ORIGINS = [
-    # for testing purposes, i will accept all origins
-    # however, i will need to change this later
-    "http://localhost:*",
-    "http://127.0.0.1:*"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     # for testing purposes, i will accept all origins
+#     # however, i will need to change this later
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000"
+# ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 

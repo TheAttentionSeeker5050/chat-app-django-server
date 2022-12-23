@@ -16,8 +16,8 @@ class ChatConversation(models.Model):
     
 class PrivateConversation(models.Model):
     """This model creates a private conversation between only 2 USERS ONLY"""
-    user_1_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
-    user_2_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    user_1_id = models.ForeignKey(AppUser,related_name="user_1", on_delete=models.CASCADE)
+    user_2_id = models.ForeignKey(AppUser, related_name="user_2", on_delete=models.CASCADE)
     creation_date = models.DateField()
     
     
@@ -33,8 +33,8 @@ class ChatMessage(models.Model):
     message edition date
     message_edited (True)
     """
-    
-    conversation_id = models.ForeignKey(ChatConversation, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False)
+    group_conversation_id = models.ForeignKey(ChatConversation, default=None, on_delete=models.CASCADE)
     MESSAGE_TYPE_CHOICES = [
         ("TEXT", "Text"),
         ("IMG", "Image"),
@@ -44,12 +44,12 @@ class ChatMessage(models.Model):
     ]
     
     message_type = models.CharField(
-        max_length=60, choices=MESSAGE_TYPE_CHOICES)
+        max_length=60, choices=MESSAGE_TYPE_CHOICES, default="TEXT")
     message_text = models.TextField()
     message_media_address = models.TextField(max_length=500)
     creation_date = models.DateField()
     edition_date = models.DateField()
-    direct_message_id = models.ForeignKey(PrivateConversation, on_delete=models.CASCADE)
+    private_conversation_id = models.ForeignKey(PrivateConversation, default=None, on_delete=models.CASCADE)
     
     
 class ChatUserAssociation(models.Model):
