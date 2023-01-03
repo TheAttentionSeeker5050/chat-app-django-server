@@ -6,6 +6,7 @@ from user.API.views.auth.register import RegisterAPIView
 from user.API.views.profile.userProfile import UserProfileDetail
 from user.API.views.contacts.findUsers import FindContactsView, ContactDetailView
 from user.API.views.contacts.sendContactInvitation import SendContactInvitationAPIView
+from user.API.views.contacts.contactInvitation import ContactInvitation
 from .views import AddMockUsers
 
 urlpatterns = [
@@ -19,5 +20,7 @@ urlpatterns = [
     path("add_mock_users", AddMockUsers.as_view(), name="add_mock_users"),
     # contact invitations and edits
     path("contacts/<str:contact_username>/invite", SendContactInvitationAPIView.as_view(), name="send_user_invite"),
+    path("contacts/my-invites/<str:contact_username>/", ContactInvitation.as_view(), name="my_contact_invitations"),
+    
     
 ]

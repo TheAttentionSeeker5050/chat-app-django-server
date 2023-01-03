@@ -45,11 +45,11 @@ class SendContactInvitationAPIView(APIView):
                     return Response({"message":"Send Contact Request Successful"},status=status.HTTP_201_CREATED)
                 except e:
                     # in case it could not be created
-                    return Response({"message":"Send Contact Request Unsuccessful"},status.HTTP_400_BAD_REQUEST)
+                    return Response({"message":"Send Contact Request Unsuccessful"}, status=status.HTTP_400_BAD_REQUEST)
 
             else:
-                return Response({"message":"Contact is already added"},status.HTTP_400_BAD_REQUEST)
+                return Response({"message":"Contact is already added"}, status=status.HTTP_400_BAD_REQUEST)
             
         except AppUser.DoesNotExist:
-            return Response({"message":"Users not found"},status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"Users not found"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(data={"message":"Could not create contact association"}, status=status.HTTP_204_NO_CONTENT)
