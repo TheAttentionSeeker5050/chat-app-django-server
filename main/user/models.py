@@ -30,4 +30,4 @@ class UserContacts(models.Model):
     user1 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
     user2 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
     contacts_since = models.DateField()
-    request_accepted = models.BooleanField(default=False)
+    request_accepted = models.BooleanField(blank=False)
