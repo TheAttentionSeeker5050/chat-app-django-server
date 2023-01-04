@@ -61,44 +61,38 @@ For this you should have set up a mysql database already, I won't explain this, 
 
 <br>
 
-<code>
-    <p>cd path/to/parent/project/folder</p>
-    <p>git clone git@github.com:TheAttentionSeeker5050/chat-app-django-server.git</p>
-</code>
+```
+    cd path/to/parent/project/folder
+    git clone git@github.com:TheAttentionSeeker5050/chat-app-django-server.git
+```
 
 <br>
 
 2. Go to the project folder just cloned, create a virtual environment and activate it (for ubuntu linux or wsl)
 
-<code>
-    <p>cd chat-app-django-server</p>
-    <p>python3 -m venv env</p>
-    <p>source env/bin/activate</p>
-</code>
+```
+    cd chat-app-django-server
+    python3 -m venv env
+    source env/bin/activate
+```
 
 <br>
 
 3. Install dependencies from requirements.txt into the activated environment:
 
-<code>
-    <p>pip install -r requirements.txt</p>
-</code>
+```
+    pip install -r requirements.txt
+```
 
 <br>
 
 4. Add environment variables. The template for the enviroment variables is in the file ./main/dot_env_template. Create a new .env file on ./main/main/.env, and it should look like this:
 
-<code>
-    <p>
+```
     SECRET_KEY = myserverencryptionsecretkey
-    </p>
-    <p>
     MYSQL_PASSWORD = mysecretmysqluserpassword
-    </p>
-    <p>
     MYSQL_USER = mysqlusername
-    </p>
-</code>
+```
 
 <strong>Note:</strong> Notice that the environment variables values have no commas, they should not.
 
@@ -106,26 +100,26 @@ For this you should have set up a mysql database already, I won't explain this, 
 
 5. Make your first database migration:
 
-<code>
-    <p>python3 main/manage.py makemigrations</p>
-    <p>python3 main/manage.py migrate</p>
-</code>
+```
+    python3 main/manage.py makemigrations
+    python3 main/manage.py migrate
+```
 
 <br>
 
 6. Add a superuser to access the django admin interface, and follow the steps on the prompt:
 
-<code>
-    <p>django-admin main/manage.py createsuperuser</p>
-</code>
+```
+    django-admin main/manage.py createsuperuser
+```
 
 <br>
 
 7. Run locally, or make changes to the git repo if you want
 
-<code>
-    <p>python3 main/manage.py runserver</p>
-</code>
+```
+    python3 main/manage.py runserver
+```
 
 <br>
 
