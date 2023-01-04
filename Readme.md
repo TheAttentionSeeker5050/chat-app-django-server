@@ -146,6 +146,6 @@ https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-djan
 
 ### Deploy on other platforms manually on VPS
 
-There are multiple ways on how to do this, I have tried myself on other projects using cloudflare and server runtimes like apache or nginx, so I would suggest you check specifically the server infrastructure guides as this is a very versatile and personalized approach, and there is no a single way to do this. I only have made this once, with my own blog app, and with manual in hand at all time. I would not call myself an expert on vps'es, and the fact that my blog still runs surprises me a lot. Still it is something I want to get good at some time.
+There are multiple ways on how to do this, I have tried myself on other projects using cloudflare and server runtimes like apache or nginx, so I would suggest you check specifically the server infrastructure guides as this is a very versatile and personalized approach, and there is not a single way to do this. I only have made this once, with my own blog app, and with manual in hand at all times. I would not call myself an expert on vps'es, and the fact that my blog still runs surprises me a lot. Still it is something I want to get good at some time.
 
 
