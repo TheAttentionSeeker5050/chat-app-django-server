@@ -53,7 +53,7 @@ At this moment, the project can be deployed on the cloud, in theory. As I test i
 
 ### Run locally
 
-For this you should have set up a mysql database already, I won't explain this, as there are multiple ways of doing it. If you are using a remote database, you may need to modify this a bit. I will be adding a remote database config functionality when I make the cloud deployment guides. 
+For this you should have set up a mysql database already, I won't explain this, as there are multiple ways of doing it. If you are using a remote database, you may need to modify this a bit. I will be adding a remote database config functionality when I make the cloud deployment guides. For this guide use your computer terminal, it is proofed to work for ubuntu's default terminal and may or may not work with the git bash. Results may vary on others, some commands may not work the same way on cmd or powershell for example, or non debian linux distros. For steps such as creating and activating the virtual environment, please research on your own how to do it with the terminal that is available to you.
 
 <br>
 
