@@ -20,14 +20,12 @@ class AppUser(AbstractUser):
     last_name = models.CharField(max_length=50, null=True)
     
 
-class UserContacts(models.Model):
+
+    
+class ContactsBlacklist(models.Model):
     """
-    This model associates users as contacts, should contain:
-    user1, user2 (they both conform into a composite key)
-    date request was accepted
-    request_accepted (boolean)
+    This model allows you to blacklist contacts
     """
     user1 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
     user2 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
-    contacts_since = models.DateField()
-    request_accepted = models.BooleanField(blank=False)
+    

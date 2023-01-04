@@ -5,8 +5,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from user.API.views.auth.register import RegisterAPIView
 from user.API.views.profile.userProfile import UserProfileDetail
 from user.API.views.contacts.findUsers import FindContactsView, ContactDetailView
-from user.API.views.contacts.sendContactInvitation import SendContactInvitationAPIView
-from user.API.views.contacts.contactInvitation import ContactInvitation
+from user.API.views.blacklist.blacklistView import BlacklistAPIView
 from .views import AddMockUsers
 
 urlpatterns = [
@@ -18,9 +17,8 @@ urlpatterns = [
     path("contacts/find-users", FindContactsView.as_view(), name="find_other_users"),
     path("contacts/view-user/<str:contact_username>/", ContactDetailView.as_view(), name="contact_detail_view"),
     path("add_mock_users", AddMockUsers.as_view(), name="add_mock_users"),
-    # contact invitations and edits
-    path("contacts/<str:contact_username>/invite", SendContactInvitationAPIView.as_view(), name="send_user_invite"),
-    path("contacts/my-invites/<str:contact_username>/", ContactInvitation.as_view(), name="my_contact_invitations"),
+    # # contact invitations and edits
+    path("contacts/blacklist-user/<str:contact_username>/", BlacklistAPIView.as_view(), name="send_user_invite"),
     
     
 ]
