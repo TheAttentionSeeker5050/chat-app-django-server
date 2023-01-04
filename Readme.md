@@ -47,7 +47,7 @@ A basic chat server application. At the moment is only text based, but will keep
 
 ## How to build and deploy this project?
 
-At this moment, the project can be deployed on the cloud, in theory. As I test it myself I will be adding the how-to guides here in this section. I could point to references or explain how to due to past experience with cloud platforms, but I want to test it ON THIS PROJECT first when I have time.
+At this moment, the project can be deployed on the cloud, in theory. As I test it myself I will be adding the how-to guides here in this section. I could point to references or explain how to due to past experience with cloud platforms, but I want to test it ON THIS PROJECT first when I have time before posting my own guides.
 
 <br>
 
