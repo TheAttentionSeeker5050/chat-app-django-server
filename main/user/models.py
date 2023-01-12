@@ -19,7 +19,8 @@ class AppUser(AbstractUser):
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
     
-
+    def __str__(self):
+        return self.username
 
     
 class ContactsBlacklist(models.Model):
@@ -29,3 +30,10 @@ class ContactsBlacklist(models.Model):
     user1 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
     user2 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+")
     
+class ContactBook(models.Model):
+    """
+    This model is for adding a contact book
+    """
+    
+    user1 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+", related_query_name="user1")
+    user2 = models.ForeignKey(AppUser, null=False, blank=False, on_delete=models.CASCADE, default=False, related_name="+", related_query_name="user2")

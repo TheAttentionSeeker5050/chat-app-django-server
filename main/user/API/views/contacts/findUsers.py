@@ -55,3 +55,4 @@ class ContactDetailView(APIView):
         return Response(serializer.data)
     
     
+    
