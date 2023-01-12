@@ -16,10 +16,10 @@ class ChatConversation(models.Model):
     
 class PrivateConversation(models.Model):
     """This model creates a private conversation between only 2 USERS ONLY"""
-    user_1_id = models.ForeignKey(AppUser,related_name="user_1", on_delete=models.CASCADE)
-    user_2_id = models.ForeignKey(AppUser, related_name="user_2", on_delete=models.CASCADE)
+    user1 = models.ForeignKey(AppUser,related_name="+", on_delete=models.CASCADE)
+    user2 = models.ForeignKey(AppUser, related_name="+", on_delete=models.CASCADE)
     creation_date = models.DateField()
-    
+    conversation_flag = models.BooleanField(default=False)
     
     
 class ChatMessage(models.Model):

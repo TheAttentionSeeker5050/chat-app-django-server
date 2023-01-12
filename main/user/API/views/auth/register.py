@@ -16,6 +16,7 @@ class RegisterAPIView(APIView):
     """
     permission_classes = [AllowAny,]
     def post(self, request, format=None):
+        print(request.data, type(request.data))
         serializer=UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
             if serializer.validate_password(request.data["password"]):

@@ -3,10 +3,11 @@ Serializer for create private conversation and first private conversation messag
 """
 
 # serializer methods imports
-from user.models import AppUser
 from rest_framework import serializers
-from user.API.serializers.userProfile import UserProfileSerializer
-from .messageSerializer import MessageOverPrivateConversationSerializer
+
+# models and serializers imports 
+from user.models import AppUser
+from conversation.models import PrivateConversation
 
 # other imports
 from datetime import datetime
@@ -15,10 +16,18 @@ from datetime import datetime
 
 
 # your serializers go here
-class PrivateConversationSerializer():
-    first_message = MessageOverPrivateConversationSerializer()
-    user_1_id = UserProfileSerializer(required=True)
-    user_2_id = UserProfileSerializer(required=True)
-    creation_date = serializers.DateField(default=datetime.now())
+class PrivateConversationSerializer(serializers.ModelSerializer):
+    # user1 = serializers.SlugRelatedField(
+    #     slug_field="username", 
+    #     queryset=AppUser.objects.all())
+    # user2 = serializers.SlugRelatedField(
+    #     slug_field="username",
+    #     queryset=AppUser.objects.all())
+    
+    class Meta:
+        model = PrivateConversation
+        fields = ["user1", "user2", "creation_date"]
+        
+    
     
 
