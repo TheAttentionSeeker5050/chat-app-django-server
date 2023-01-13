@@ -6,7 +6,7 @@ from user.API.views.auth.register import RegisterAPIView
 from user.API.views.profile.userProfile import UserProfileDetail
 from user.API.views.contacts.findUsers import FindContactsView, ContactDetailView
 from user.API.views.blacklist.blacklistView import BlacklistAPIView
-from user.API.views.contacts.contactBook import ContactBookView
+from user.API.views.contacts.contactBook import ContactBookView, ContactBookListView
 
 from .views import AddMockUsers
 
@@ -22,7 +22,7 @@ urlpatterns = [
     # # contact invitations and edits
     path("contacts/blacklist-user/<str:contact_username>/", BlacklistAPIView.as_view(), name="send_user_invite"),
     path("contacts/contact-book/<str:contact_username>/", ContactBookView.as_view(), name="add_user_to_contacts"),
-    # path("contacts/contact-book/", ContactBookListView.as_view(), name="get_contacts_list"),
+    path("contacts/contact-book/", ContactBookListView.as_view(), name="get_contacts_list"),
     
     
     

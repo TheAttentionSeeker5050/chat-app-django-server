@@ -11,6 +11,7 @@ from user.models import ContactBook
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import status
+import json
 
 # authentications
 from rest_framework.authentication import TokenAuthentication
@@ -92,35 +93,24 @@ class ContactBookView(APIView):
         return Response(serializer.data)
     
 
-    
-# class ContactBookListView(APIView):
-#     """
-#     Create, get or delete contact book associations for users
-#     """
-#     def get(self, request, format=None):
-#         queryset = ContactBook.objects.filter(user1__username=request.user)
-#         return Response(data={"data":queryset})
-    
-    # def get(self, request, format=None):
-    #     """Get all the users contacts"""
-    #     user1 = AppUser.objects.get(username=request.user)
-        
-    #     contacts = ContactBook.objects.filter(user1__username=user1.username)
-    #     print(contacts[:])
-    #     # serializer = ContactBookSerializer(contacts[:], many=True)
-    #     return Response(data={"response":"contacts"})
-    
-    # class ContactBookListView(generics.ListAPIView):
-    # """
-    # Create, get or delete contact book associations for users
-    # """
-    # model = ContactBook
-    
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+class ContactBookListView(APIView):
+    """Get a list of the main users matching the search criteria"""
     # serializer_class = ContactBookSerializer
-    
-    # def get_queryset(self):
-    #     user = self.request.user
-        
-    #     return ContactBook.objects.filter(user1__username=user)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    # model = Contact
+
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        print("getting contacts")
+        contacts = ContactBook.objects.all()
+        print("serializing")
+        serializer = ContactBookSerializer(contacts, many=True)
+        print("finished serializing")
+        print(serializer)
+        print(type(serializer.data))
+        return Response(serializer.data)
+        # query = ContactBook.objects.all()
+        # return Response(query)
