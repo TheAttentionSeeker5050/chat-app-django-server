@@ -131,6 +131,7 @@ https://devcenter.heroku.com/articles/django-app-configuration
 <br>
 
 ### Deploy on google cloud
+
 Work in progress. For more info try the following link:
 https://cloud.google.com/python/django
 

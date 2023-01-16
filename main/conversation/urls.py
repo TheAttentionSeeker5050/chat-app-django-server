@@ -9,6 +9,7 @@ get all messages in conversation
 edit message in conversation
 drop message in conversation
 """
+from main.conversation.API.conversationsView.privateConversationViews import PrivateConversationView
 urlpatterns = [
-    
+    path("private", PrivateConversationView.as_view(), name="private_conversation"),
 ]

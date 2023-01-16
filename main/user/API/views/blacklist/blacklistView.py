@@ -51,28 +51,7 @@ class BlacklistAPIView(APIView):
             return Response({"message":"Users not found"},status=status.HTTP_404_NOT_FOUND)
         return Response(data={"message":"Could not create blacklist association"}, status=status.HTTP_400_BAD_REQUEST)
     
-    def get(self, request, contact_username, format=None):
-        # we get the blacklisted entry for permissions purposes, this will be read by middleware
-        try:
-            # get app user entries to associate to the user, user 1 is the authenticated user with api key
-            user1 = AppUser.objects.get(username=request.user) 
-            user2 = AppUser.objects.get(username=contact_username) # user 2 is from the url param contact_username
-            
-            # now that we have both users we test if there is a previous entry
-            test_case_previous_entry_1 = ContactsBlacklist.objects.filter(user1=user1, user2=user2).count()
-            test_case_previous_entry_2 = ContactsBlacklist.objects.filter(user1=user2, user2=user1).count()
-            
-            if (test_case_previous_entry_1==0 or test_case_previous_entry_2==0):
-                # in case there are no previous blakclist regarding user associations, return entry boolean equals to false, returned_Exception is for handling errors to pass to the client
-                return Response({"message":"User is not blacklisted", "is_blacklisted": False, "returned_exception":False }, status=status.HTTP_200_OK )
-            else:
-                # in case there are entries, return blacklisted equals to true
-                return Response({"message":"Blacklist entries found", "is_blacklisted": True, "returned_exception":False }, status=status.HTTP_200_OK)
-            
-        except AppUser.DoesNotExist:
-            return Response({"message":"Users not found" , "returned_exception":True},status=status.HTTP_404_NOT_FOUND)
-        return Response(data={"message":"Could not create blacklist association", "returned_exception":True}, status=status.HTTP_400_BAD_REQUEST)
-    
+  
     def delete(self, request, contact_username, format=None):
         # when we want to de-blacklist a contact, meaning we want to remove the blacklist entry from the contact
         try:
@@ -98,3 +77,31 @@ class BlacklistAPIView(APIView):
         except AppUser.DoesNotExist:
             return Response({"message":"Users not found"},status=status.HTTP_404_NOT_FOUND)
         return Response(data={"message":"Could not create blacklist association"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request, contact_username, format=None):
+        # we get the blacklisted entry for permissions purposes, this will be read by middleware
+        try:
+            
+            user1 = AppUser.objects.get(username=request.user) 
+            user2 = AppUser.objects.get(username=contact_username) # user 2 is from the url param contact_username
+        
+            test_case_previous_entry_1 = ContactsBlacklist.objects.filter(user1=user1, user2=user2).count()
+            test_case_previous_entry_2 = ContactsBlacklist.objects.filter(user1=user2, user2=user1).count()
+            
+            if (test_case_previous_entry_1>=1):
+                return Response(data={"message": "Contact was blacklisted by user", "is_blacklisted": True, "is_blacklisted_by_user": True, "returned_exception":False})
+            elif (test_case_previous_entry_2>=1):
+                return Response(data={"message": "Contact blacklisted you", "is_blacklisted":True, "is_blacklisted_by_user": False, "returned_exception":False})
+            else:
+                return Response(data={"message": "Contact is not blacklisted", "is_blacklisted":False, "is_blacklisted_by_user": False, "returned_exception":False})
+            
+            
+            return Response(data={"message":"Request returned exception", "returned_exception":True}, status=status.HTTP_400_BAD_REQUEST)
+        
+        except AppUser.DoesNotExist:
+            return Response({"message":"Users not found" , "returned_exception":True},status=status.HTTP_404_NOT_FOUND)
+        return Response(data={"message":"Request returned exception", "returned_exception":True}, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+
+    
