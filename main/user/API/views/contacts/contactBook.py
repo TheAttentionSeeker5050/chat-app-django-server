@@ -8,7 +8,7 @@ from user.models import AppUser
 from user.models import ContactBook
 
 # http imports
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from rest_framework.response import Response
 from rest_framework import status
 import json
@@ -104,13 +104,6 @@ class ContactBookListView(APIView):
         """
         Return a list of all users.
         """
-        print("getting contacts")
-        contacts = ContactBook.objects.all()
-        print("serializing")
-        serializer = ContactBookSerializer(contacts, many=True)
-        print("finished serializing")
-        print(serializer)
-        print(type(serializer.data))
-        return Response(serializer.data)
-        # query = ContactBook.objects.all()
-        # return Response(query)
+        authUser = self.request.user
+        response = ContactBook.objects.filter(user1=authUser).values("user1__username", "user2__username")
+        return Response({"results": response})

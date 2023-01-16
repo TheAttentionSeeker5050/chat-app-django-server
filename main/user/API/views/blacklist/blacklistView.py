@@ -101,3 +101,7 @@ class BlacklistAPIView(APIView):
         except AppUser.DoesNotExist:
             return Response({"message":"Users not found" , "returned_exception":True},status=status.HTTP_404_NOT_FOUND)
         return Response(data={"message":"Request returned exception", "returned_exception":True}, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+
+    

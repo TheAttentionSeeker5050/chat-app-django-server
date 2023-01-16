@@ -1,6 +1,6 @@
 from user.models import AppUser, ContactsBlacklist
 from rest_framework import serializers
-
+from user.API.serializers.userProfile import UserProfileSerializer
 """
 Serializers in this file will be used to retrieve and change user blacklist data
 """
@@ -12,3 +12,7 @@ class BlacklistSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppUser
         fields = ["user1", "user2"]
+        
+
+    
+    
