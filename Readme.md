@@ -45,6 +45,62 @@ A basic chat server application. At the moment is only text based, but will keep
 <br>
 <br>
 
+## Rest API call Structure
+
+The functioning API calls at this moment are the following (all calls except the register and login api calls must include Web token as "Token [token_str]" in header ):
+
+
+```
+    POST /users/login
+    # request body: username, password
+    #################################################################
+
+    POST /users/register
+    # request body: username, password, email, optional: first_name, last_name
+
+    #################################################################
+
+    # the following API calls are for retrieving and modifying authenticated user's profile data
+
+    GET /users/profile # retrieve user profile data from web token in headers
+
+    PUT /users/profile # edit user profile data (enter the desired fields to update in request body)
+
+    DEL /users/profile # delete user profile data
+
+    #################################################################
+
+    # the following calls are for finding other users in the application
+
+    GET /users/contacts/find-users?search=[field] # find other users using query params. The API is set to work for partial or completely matching usernames, names and email addresses of other users. returns an array of user instances
+
+    GET /users/contacts/view-user/[username] # get other user's profile data, except passwords
+
+    #################################################################
+
+    # the following calls are to set or retrieve blacklist status. A pair of user who are blacklisted cannot send direct messages to each other
+
+    GET /users/contacts/blacklist-user/[username] # get the blacklist status of the user with username specified in url parameter
+    # it will return a json object with the values for message (for event handling), is_blacklisted (bool), is_blacklisted_by_user (only the user who blacklisted can remove the blacklisted status)
+
+    POST /users/contacts/blacklist-user/[username] # blacklists another user. The data model defines user1 as the authenticated user, and user2 as the user in the username url param
+    # we can only blacklist an user if it is not being done yet
+
+    DEL /users/contacts/blacklist-user/[username] # removes blacklist status
+    # we can only delete blacklist entries in the database if there is an existing entry for the user1 (authenticated user) and user2 (in url param) pair
+
+    #################################################################
+
+    # the following calls are for retrieving contact list, and adding and removing contacts
+
+    GET /users/contacts/contact-book/ # get all the contacts for the authenticated user
+    
+    POST /users/contacts/contact-book/[username] # add contact specified in url parameter to contact book
+
+    DEL /users/contacts/contact-book/[username] # deletes contact specified in url parameter to contact book
+```
+
+
 ## How to build and deploy this project?
 
 At this moment, the project can be deployed on the cloud, in theory. As I test it myself I will be adding the how-to guides here in this section. I could point to references or explain how to due to past experience with cloud platforms, but I want to test it ON THIS PROJECT first when I have time before posting my own guides.

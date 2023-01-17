@@ -17,13 +17,13 @@ urlpatterns = [
     path("profile", UserProfileDetail.as_view(), name="user_profile"),
     # other users
     path("contacts/find-users", FindContactsView.as_view(), name="find_other_users"),
-    path("contacts/view-user/<str:contact_username>/", ContactDetailView.as_view(), name="contact_detail_view"),
+    path("contacts/view-user/<str:contact_username>", ContactDetailView.as_view(), name="contact_detail_view"),
     # path("add_mock_users", AddMockUsers.as_view(), name="add_mock_users"), ## this is just for creating dummy data, will comment when I don't need it
     
     
     # # # contact invitations and edits
-    path("contacts/blacklist-user/<str:contact_username>/", BlacklistAPIView.as_view(), name="send_user_invite"),
-    path("contacts/contact-book/<str:contact_username>/", ContactBookView.as_view(), name="add_user_to_contacts"),
+    path("contacts/blacklist-user/<str:contact_username>", BlacklistAPIView.as_view(), name="send_user_invite"),
+    path("contacts/contact-book/<str:contact_username>", ContactBookView.as_view(), name="add_user_to_contacts"),
     path("contacts/contact-book/", ContactBookListView.as_view(), name="get_contacts_list"),
     
     
